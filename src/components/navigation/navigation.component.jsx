@@ -4,6 +4,8 @@ import Clarifai from 'clarifai';
 
 import { Link } from 'react-router-dom';
 
+import { auth } from '../../firebase.utils';
+
 import ImageLinkForm from '../ImageLinkForm/ImagLinkForm.component';
 import FaceRecognition from '../FaceRecognition/FaceRecognition.component';
 
@@ -24,6 +26,7 @@ class Navigation extends React.Component {
             input: "",
             imageUrl: "",
             box: {},
+
         }
     }
 
@@ -71,7 +74,7 @@ class Navigation extends React.Component {
                 <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Logo style={{ border: '1px solid black' }} />
                     <div className='nav-links'  >
-                        <Link to='/' className='f3 link dim black underline pa3 pointer'>Sign Out</Link>
+                        <Link to='/' onClick={() => auth.signOut()} className='f3 link dim black underline pa3 pointer'>Sign Out</Link>
                         <Link to='/info' className='f3 link dim black underline pa3 pointer'>How to Use</Link>
                         <a href='https://volovlikovevgeny.github.io/contacts/' className='f3 link dim black underline pa3 pointer'>RoboContact</a>
                     </div>

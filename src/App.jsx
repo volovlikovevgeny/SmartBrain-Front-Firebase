@@ -23,6 +23,17 @@ const particlesOptions = {
 
 
 class App extends React.Component {
+
+
+
+  constructor() {
+    super()
+
+    this.state = {
+      currentUser: null
+    }
+  }
+
   render() {
     return (
       <div className="App"  >
