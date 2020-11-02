@@ -3,6 +3,7 @@ import Particles from 'react-particles-js';
 import Navigation from './components/navigation/navigation.component';
 import Signin from './components/sign-in/sign-in.component';
 import Register from './components/register/register.component';
+import Info from './components/info/info.component';
 
 import { Route, Switch } from 'react-router-dom';
 
@@ -24,8 +25,6 @@ const particlesOptions = {
 
 class App extends React.Component {
 
-
-
   constructor() {
     super()
 
@@ -42,7 +41,8 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={Signin}></Route>
           <Route path='/register' component={Register}></Route>
-          <Route path='/home' component={Navigation} ></Route>
+          <Route path='/info' component={Info}></Route>
+          <Route exact path='/home' component={Navigation} ></Route>
         </Switch>
       </div>
     )

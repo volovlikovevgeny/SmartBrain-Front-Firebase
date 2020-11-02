@@ -6,7 +6,6 @@
   max-width: 1300px;
   text-align: center;
   margin: 0 auto;
-  /* display: flex; */
 }
 
 .particles {
@@ -34,5 +33,18 @@
 
   .nav-links a {
     font-size: 1.1rem;
+  }
+
+  .info-inner{
+    flex-direction: column-reverse;
+  }
+
+  .info-text{
+    margin-top: 20px;
+  }
+
+  .info-img{
+    padding: 0;
+    width: 75%;
   }
 }

@@ -3,14 +3,10 @@ import Logo from '../logo/logo.component';
 import Clarifai from 'clarifai';
 
 import { Link } from 'react-router-dom';
-
 import { auth } from '../../firebase.utils';
 
 import ImageLinkForm from '../ImageLinkForm/ImagLinkForm.component';
-import FaceRecognition from '../FaceRecognition/FaceRecognition.component';
-
-// https://www.khl.ru/img/teamplayers_db/6053/22699.jpg
-
+import FaceRecognition from '../FaceRecognition/FaceRecognition.component'
 
 const app = new Clarifai.App({
     apiKey: '7ae13881190244dbb6a41deca3ed3346'
@@ -25,32 +21,31 @@ class Navigation extends React.Component {
         this.state = {
             input: "",
             imageUrl: "",
-            box: {},
+            box: [],
 
         }
     }
 
     calculateFaceLocation = (data) => {
-        const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
-        const image = document.getElementById('inputimage');
-        const width = Number(image.width);
-        const height = Number(image.height);
-        return {
-            leftCol: clarifaiFace.left_col * width,
-            topRow: clarifaiFace.top_row * height,
-            rightCol: width - (clarifaiFace.right_col * width),
-            bottomRow: height - (clarifaiFace.bottom_row * height)
-        }
-    }
+        return data.outputs[0].data.regions.map(face => {
+            const clarifaiFace = face.region_info.bounding_box;
 
-    displayFaceBox = (box) => {
-        console.log(box);
-        this.setState({
-            box: box
+            const image = document.getElementById('inputimage');
+            const width = Number(image.width);
+            const height = Number(image.height);
+
+            return {
+                leftCol: clarifaiFace.left_col * width,
+                topRow: clarifaiFace.top_row * height,
+                rightCol: width - (clarifaiFace.right_col * width),
+                bottomRow: height - (clarifaiFace.bottom_row * height),
+            }
         })
     }
 
-
+    displayFaceBox = (box) => {
+        this.setState({ box: box })
+    }
 
     onInputChange = (event) => {
         const { value } = event.target;
@@ -58,7 +53,6 @@ class Navigation extends React.Component {
     }
 
     onButtonSubmit = () => {
-
         this.setState({ imageUrl: this.state.input, })
 
         app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
@@ -76,7 +70,6 @@ class Navigation extends React.Component {
                     <div className='nav-links'  >
                         <Link to='/' onClick={() => auth.signOut()} className='f3 link dim black underline pa3 pointer'>Sign Out</Link>
                         <Link to='/info' className='f3 link dim black underline pa3 pointer'>How to Use</Link>
-                        <a href='https://volovlikovevgeny.github.io/contacts/' className='f3 link dim black underline pa3 pointer'>RoboContact</a>
                     </div>
                 </nav>
                 <ImageLinkForm

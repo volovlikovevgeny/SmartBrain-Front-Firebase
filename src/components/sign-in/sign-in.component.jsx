@@ -18,7 +18,6 @@ class Signin extends React.Component {
 
     unsubscribeFromAuth = null
 
-
     componentDidMount() {
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
             if (userAuth) {
@@ -41,8 +40,6 @@ class Signin extends React.Component {
 
     componentWillUnmount() {
         this.unsubscribeFromAuth();
-
-        console.log('componentwill unmount ');
     }
 
     handleSubmit = async event => {
@@ -61,12 +58,10 @@ class Signin extends React.Component {
 
     handleChange = event => {
         const { value, name } = event.target;
-
         this.setState({ [name]: value });
     };
 
     render() {
-        console.log(this.state);
         const { email, password, } = this.state;
         return (
             <form className='signin' style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', flexDirection: 'column' }} onSubmit={this.handleSubmit} >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { auth, createProfileDocument } from '../../firebase.utils';
 
 class Register extends React.Component {
@@ -11,7 +11,8 @@ class Register extends React.Component {
             displayName: '',
             email: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            user: false
         }
     }
 
@@ -34,7 +35,8 @@ class Register extends React.Component {
                 displayName: '',
                 email: '',
                 password: '',
-                confirmPassword: ''
+                confirmPassword: '',
+                user: true
             })
         } catch (error) {
             console.error(error);
@@ -49,7 +51,6 @@ class Register extends React.Component {
 
     render() {
         const { displayName, email, password, confirmPassword } = this.state;
-        console.log(this.state);
         return (
             <form
                 onSubmit={this.handleSubmit}
@@ -64,7 +65,7 @@ class Register extends React.Component {
                 <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                     <main className="pa4 black-80">
                         <div className="measure">
-                            <form id="sign_up" className="ba b--transparent ph0 mh0">
+                            <div id="sign_up" className="ba b--transparent ph0 mh0">
                                 <legend className="f1 fw6 ph0 mh0">Register</legend>
                                 <div className="mt3">
                                     <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
@@ -78,7 +79,7 @@ class Register extends React.Component {
                                     />
                                 </div>
                                 <div className="mt3">
-                                    <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
+                                    <label className="db fw6 lh-copy f6">Email</label>
                                     <input
                                         className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                                         type="email"
@@ -110,14 +111,16 @@ class Register extends React.Component {
                                         required
                                     />
                                 </div>
-                            </form>
+                            </div>
                             <div className="">
                                 <button
                                     className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                     type="submit"
-                                    value="Register"
                                 >Register</button>
                             </div>
+                            {
+                                this.state.user === true ? <Redirect to='/home' /> : false
+                            }
                         </div>
                     </main>
                 </article>

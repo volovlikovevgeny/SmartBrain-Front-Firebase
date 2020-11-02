@@ -1,0 +1,32 @@
+.info{
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-inner{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.info-text{
+   text-align: justify;
+    width: 45%;
+    margin-right: 20px;
+}
+
+.info-img{
+    padding:0 15px;
+    width: 65%;
+    height: auto;
+   
+}
+
+.info-img img{
+    border-radius:10px ;
+}
+
