@@ -60,7 +60,6 @@ class Navigation extends React.Component {
                 .catch(err => console.log(err)));
     }
 
-
     render() {
         const { imageUrl, box } = this.state;
         return (

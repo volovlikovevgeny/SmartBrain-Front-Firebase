@@ -24,6 +24,7 @@ class Register extends React.Component {
 
         if (password !== confirmPassword) {
             alert('Passwords don`t match')
+            return
         }
 
         try {
